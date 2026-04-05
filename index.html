@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Road Rush</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Game canvas -->
+  <canvas id="game"></canvas>
+
+  <!-- ── Menu Screen ────────────────────────────────────────────────────── -->
+  <div id="screen-menu" class="screen">
+    <h1>ROAD RUSH</h1>
+    <p class="subtitle">SURVIVAL RACING</p>
+
+    <!-- Name entry -->
+    <div class="name-entry">
+      <label for="player-name-input">YOUR NAME</label>
+      <input id="player-name-input" type="text" maxlength="12"
+             placeholder="ENTER NAME" autocomplete="off" spellcheck="false">
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="menu-leaderboard" class="leaderboard">
+      <p class="lb-title">LEADERBOARD</p>
+      <div id="menu-lb-rows"></div>
+    </div>
+
+    <div id="skin-carousel">
+      <label>CHOOSE YOUR CAR</label>
+      <div class="carousel-row">
+        <button id="skin-prev" class="btn-arrow">◀</button>
+        <canvas id="skin-preview" width="120" height="160"></canvas>
+        <button id="skin-next" class="btn-arrow">▶</button>
+      </div>
+      <p id="skin-name">CRIMSON</p>
+      <div id="skin-dots"></div>
+    </div>
+
+    <button id="btn-start" class="btn">▶  START RACE</button>
+
+    <p class="controls-hint">
+      ← → ARROW KEYS or A / D to steer<br>
+      Touch left / right side of screen on mobile
+    </p>
+  </div>
+
+  <!-- ── Game Over Screen ───────────────────────────────────────────────── -->
+  <div id="screen-gameover" class="screen" style="display:none">
+    <h2>GAME OVER</h2>
+
+    <div class="go-scores-row">
+      <div class="go-row">
+        <span class="label">YOUR SCORE</span>
+        <span class="value" id="go-score">0000000</span>
+      </div>
+      <div class="go-row">
+        <span class="label">YOUR BEST</span>
+        <span class="value" id="go-best">0000000</span>
+      </div>
+    </div>
+
+    <p id="go-newhigh" style="display:none">★ NEW PERSONAL BEST! ★</p>
+
+    <!-- Leaderboard on game over -->
+    <div id="go-leaderboard" class="leaderboard">
+      <p class="lb-title">LEADERBOARD</p>
+      <div id="go-lb-rows"></div>
+    </div>
+
+    <button id="btn-restart" class="btn">↩  BACK TO MENU</button>
+  </div>
+
+  <!-- ── Scripts (dependency order) ────────────────────────────────────── -->
+  <script src="js/constants.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/road.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/obstacles.js"></script>
+  <script src="js/powerups.js"></script>
+  <script src="js/hud.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: 'Courier New', Courier, monospace;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#game {
+  display: block;
+  touch-action: none;
+}
+
+/* ── Overlay screens ─────────────────────────────────────────────────────── */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: rgba(10, 10, 30, 0.88);
+  z-index: 10;
+}
+
+/* ── Menu screen ─────────────────────────────────────────────────────────── */
+#screen-menu h1 {
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  color: #ffdd00;
+  text-shadow: 0 0 20px #ff8800, 0 0 40px #ff4400;
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+
+#screen-menu .subtitle {
+  color: #aaaacc;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  letter-spacing: 0.3em;
+  margin-top: -10px;
+  margin-bottom: 8px;
+}
+
+/* ── Name entry ──────────────────────────────────────────────────────────── */
+.name-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.name-entry label {
+  color: #aaaacc;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+}
+
+#player-name-input {
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  letter-spacing: 0.2em;
+  padding: 8px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 220px;
+  outline: none;
+  transition: border-color 0.2s;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+#player-name-input:focus {
+  border-color: #ffdd00;
+  box-shadow: 0 0 10px rgba(255,221,0,0.3);
+}
+
+#player-name-input::placeholder { color: rgba(255,255,255,0.25); }
+
+/* ── Leaderboard ─────────────────────────────────────────────────────────── */
+.leaderboard {
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 20px;
+  min-width: 280px;
+  max-width: 340px;
+  width: 90vw;
+}
+
+.lb-title {
+  color: #ffdd00;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: clamp(0.7rem, 1.8vw, 0.88rem);
+}
+.lb-row:last-child { border-bottom: none; }
+
+.lb-rank {
+  color: #555577;
+  width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.lb-rank.gold   { color: #ffdd00; }
+.lb-rank.silver { color: #aaaaaa; }
+.lb-rank.bronze { color: #cc7733; }
+
+.lb-name {
+  color: #ccccee;
+  flex: 1;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lb-name.current-player { color: #ffdd00; }
+
+.lb-score {
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.lb-empty {
+  color: #444466;
+  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  padding: 6px 0;
+}
+
+/* ── Skin carousel ───────────────────────────────────────────────────────── */
+#skin-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 16px 24px;
+}
+
+#skin-carousel label {
+  color: #aaaacc;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.carousel-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#skin-preview {
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.18);
+  background: #1a1a2e;
+  display: block;
+}
+
+#skin-name {
+  color: #ffffff;
+  font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+  letter-spacing: 0.2em;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+#skin-dots {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+}
+
+.skin-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background 0.2s;
+}
+.skin-dot.active { background: #ffdd00; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  background: transparent;
+  border: 2px solid #ffdd00;
+  color: #ffdd00;
+  font-family: inherit;
+  font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+  letter-spacing: 0.2em;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.btn:hover, .btn:focus {
+  background: #ffdd00;
+  color: #1a1a2e;
+  box-shadow: 0 0 18px #ffdd00;
+  outline: none;
+}
+
+.btn-arrow {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+  font-size: 1.2rem;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.btn-arrow:hover { border-color: #ffdd00; background: rgba(255,221,0,0.12); }
+
+/* ── Game over screen ────────────────────────────────────────────────────── */
+#screen-gameover h2 {
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  color: #ff2200;
+  text-shadow: 0 0 18px #ff2200;
+  letter-spacing: 0.1em;
+}
+
+.go-scores-row {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.go-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.go-row .label {
+  color: #888899;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+}
+
+.go-row .value {
+  color: #ffffff;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  letter-spacing: 0.15em;
+}
+
+#go-newhigh {
+  color: #ffdd00;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 16px #ffdd00, 0 0 30px #ff8800;
+  animation: pulse 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1.0; }
+}
+
+.controls-hint {
+  color: #555577;
+  font-size: clamp(0.65rem, 1.8vw, 0.82rem);
+  letter-spacing: 0.15em;
+  text-align: center;
+  line-height: 1.7;
+}
