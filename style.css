@@ -144,6 +144,10 @@ body {
   letter-spacing: 0.15em;
   padding: 6px 0;
 }
+.lb-loading {
+  color: #555577;
+  animation: pulse 0.9s ease-in-out infinite alternate;
+}
 
 /* ── Skin carousel ───────────────────────────────────────────────────────── */
 #skin-carousel {

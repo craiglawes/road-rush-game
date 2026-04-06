@@ -45,20 +45,31 @@ function initUI() {
 }
 
 // ─── Leaderboard rendering ───────────────────────────────────────────────────
-function renderLeaderboard(containerId) {
+async function renderLeaderboard(containerId) {
   const container = document.getElementById(containerId);
-  const board = getLeaderboard();
   const currentPlayer = gameState.playerName.trim();
 
-  if (board.length === 0) {
+  // Show loading state immediately
+  container.innerHTML = '<p class="lb-empty lb-loading">LOADING...</p>';
+
+  // Try Supabase with a 3-second timeout, fall back to localStorage
+  let board = null;
+  if (typeof fetchLeaderboard === 'function') {
+    const timeout = new Promise(resolve => setTimeout(() => resolve(null), 3000));
+    board = await Promise.race([fetchLeaderboard(), timeout]);
+  }
+  if (!board || board.length === 0) board = getLeaderboard();
+
+  if (!board || board.length === 0) {
     container.innerHTML = '<p class="lb-empty">NO SCORES YET — BE THE FIRST!</p>';
     return;
   }
 
+  const medals = ['🥇', '🥈', '🥉'];
   const rankLabels = ['gold', 'silver', 'bronze'];
   container.innerHTML = board.map((entry, i) => {
     const rankClass = rankLabels[i] || '';
-    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`;
+    const medal = medals[i] || `${i + 1}.`;
     const isYou = entry.name === currentPlayer;
     return `
       <div class="lb-row">
@@ -98,7 +109,7 @@ function showScreen(id) {
   if (id) document.getElementById(id).style.display = 'flex';
 }
 
-function showGameOver() {
+async function showGameOver() {
   const isPersonalBest = submitScore(gameState.playerName, gameState.score);
   gameState.newHighScore = isPersonalBest;
 
@@ -109,8 +120,9 @@ function showGameOver() {
 
   document.getElementById('go-newhigh').style.display = isPersonalBest ? 'block' : 'none';
 
-  renderLeaderboard('go-lb-rows');
+  // Show screen first so player isn't staring at a blank — leaderboard fills in async
   showScreen('screen-gameover');
+  await renderLeaderboard('go-lb-rows');
 }
 
 function startCountdown() {

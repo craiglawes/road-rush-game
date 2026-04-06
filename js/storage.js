@@ -28,6 +28,13 @@ function submitScore(name, score) {
   board.sort((a, b) => b.score - a.score);
   if (board.length > MAX_ENTRIES) board.length = MAX_ENTRIES;
   localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(board));
+
+  // Push to global Supabase leaderboard (fire-and-forget — local save already done)
+  // Minimum score of 500 prevents test/accidental runs polluting the live table
+  if (isPersonalBest && typeof upsertScore === 'function' && Math.floor(score) >= 500) {
+    upsertScore(trimmed, Math.floor(score));
+  }
+
   return isPersonalBest;
 }
 
