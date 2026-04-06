@@ -10,20 +10,20 @@ const FOV_DEGREES     = 100;
 const CAMERA_DEPTH    = 1 / Math.tan((FOV_DEGREES / 2) * Math.PI / 180);
 
 // ─── Difficulty ──────────────────────────────────────────────────────────────
-const INITIAL_SPEED         = 300;   // world units / second
+const INITIAL_SPEED         = 380;   // world units / second
 const MAX_SPEED             = 900;
-const SPEED_RAMP_RATE       = 12;    // units added per second
-const INITIAL_SPAWN_INT     = 2.8;   // seconds between obstacle spawns
+const SPEED_RAMP_RATE       = 22;    // units added per second
+const INITIAL_SPAWN_INT     = 1.4;   // seconds between obstacle spawns
 const MIN_SPAWN_INT         = 0.65;
-const SPAWN_RAMP_RATE       = 0.015; // reduction per second
-const CURVE_START_TIME      = 90;    // seconds before curves appear
+const SPAWN_RAMP_RATE       = 0.025; // reduction per second
+const CURVE_START_TIME      = 55;    // seconds before curves appear
 const MAX_CURVE_INTENSITY   = 0.8;
 
 const DIFFICULTY_TIERS = [
   { time:   0, name: 'EASY',   color: '#44ee44' },
-  { time:  30, name: 'MEDIUM', color: '#ffee00' },
-  { time:  90, name: 'HARD',   color: '#ff8800' },
-  { time: 180, name: 'INSANE', color: '#ff2222' },
+  { time:  20, name: 'MEDIUM', color: '#ffee00' },
+  { time:  55, name: 'HARD',   color: '#ff8800' },
+  { time: 110, name: 'INSANE', color: '#ff2222' },
 ];
 
 // ─── Player ──────────────────────────────────────────────────────────────────

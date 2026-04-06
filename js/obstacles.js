@@ -37,8 +37,9 @@ function updateObstacles(dt) {
     }
 
     // ── Collision check ──────────────────────────────────────────────────
-    const zDist = Math.abs(obj.worldZ - gameState.cameraZ);
-    if (zDist < COLLISION_Z_THRESHOLD) {
+    // Only check obstacles that are ahead of or just passing the player (not behind)
+    const zDiff = obj.worldZ - gameState.cameraZ;
+    if (zDiff > -(SEGMENT_LENGTH * 0.5) && zDiff < COLLISION_Z_THRESHOLD) {
       const playerCenter = getPlayerLaneCenter();
       const entityCenter = obj.lane;
       const laneDist = Math.abs(playerCenter - entityCenter);
@@ -98,7 +99,7 @@ function drawObstacles(ctx, W, H) {
     const pos = entityScreenPos(obj.lane, obj.worldZ, W, H);
     if (!pos) continue;
 
-    const scale = pos.scale * 0.7;
+    const scale = pos.scale * 0.9;
     if (scale < 0.05) continue;
 
     drawCar(ctx, pos.x, pos.y, scale, obj.palette, false);

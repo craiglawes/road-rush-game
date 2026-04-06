@@ -247,7 +247,7 @@ function drawPlayer(ctx, W, H) {
   const laneCenter = p.lane + p.laneProgress; // 0..2, smooth
   const cx = W * (0.5 + (laneCenter - 1) * 0.213);
   const cy = H * 0.82;
-  const scale = 1.0;
+  const scale = Math.max(0.45, Math.min(1.0, W / 800));
 
   // Shield glow
   if (p.shieldActive) {
