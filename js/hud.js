@@ -71,6 +71,23 @@ function drawHUD(ctx, W, H) {
     py -= 30;
   }
 
+  // ── Power-up incoming hint — shows when a powerup is on the road ahead ──
+  const nearPowerup = powerupPool.find(p =>
+    p.active && (p.worldZ - gameState.cameraZ) > COLLISION_Z_MIN
+  );
+  if (nearPowerup) {
+    const pulse = 0.6 + 0.4 * Math.sin(Date.now() / 180);
+    ctx.save();
+    ctx.globalAlpha = pulse;
+    ctx.fillStyle   = '#ffdd00';
+    ctx.font        = `bold ${Math.round(H * 0.028)}px 'Courier New', monospace`;
+    ctx.textAlign   = 'center';
+    ctx.shadowColor = '#ffaa00';
+    ctx.shadowBlur  = 14;
+    ctx.fillText('⚡ POWERUP INCOMING', W / 2, H * 0.28);
+    ctx.restore();
+  }
+
   // ── Flash overlay (crash / hit) ───────────────────────────────────────────
   if (s.flashTimer > 0) {
     ctx.save();
@@ -98,14 +115,19 @@ function drawHUD(ctx, W, H) {
   // ── Tier announcement ──────────────────────────────────────────────────────
   if (s.tierAnnounce) {
     s.tierAnnounce.timer -= s._dt || (1 / 60);
-    const alpha = Math.min(1, s.tierAnnounce.timer * 2);
+    const alpha = Math.min(1, s.tierAnnounce.timer * 1.2);
+    const ty = H * 0.36;
     ctx.save();
     ctx.globalAlpha = alpha;
+    // Dark backing band
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    ctx.fillRect(0, ty - Math.round(H * 0.075), W, Math.round(H * 0.1));
+    // Tier name
     ctx.fillStyle   = s.tierAnnounce.color;
-    ctx.font        = `bold ${Math.round(H * 0.065)}px 'Courier New', monospace`;
+    ctx.font        = `bold ${Math.round(H * 0.072)}px 'Courier New', monospace`;
     ctx.textAlign   = 'center';
-    ctx.shadowColor = s.tierAnnounce.color; ctx.shadowBlur = 20;
-    ctx.fillText(s.tierAnnounce.text, W / 2, H * 0.38);
+    ctx.shadowColor = s.tierAnnounce.color; ctx.shadowBlur = 28;
+    ctx.fillText(s.tierAnnounce.text, W / 2, ty);
     ctx.restore();
     if (s.tierAnnounce.timer <= 0) s.tierAnnounce = null;
   }

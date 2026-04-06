@@ -10,27 +10,28 @@ const FOV_DEGREES     = 100;
 const CAMERA_DEPTH    = 1 / Math.tan((FOV_DEGREES / 2) * Math.PI / 180);
 
 // ─── Difficulty ──────────────────────────────────────────────────────────────
-const INITIAL_SPEED         = 380;   // world units / second
-const MAX_SPEED             = 900;
-const SPEED_RAMP_RATE       = 22;    // units added per second
+const INITIAL_SPEED         = 420;   // world units / second
+const MAX_SPEED             = 1500;  // ceiling reached ~75s
+const SPEED_RAMP_RATE       = 18;    // ramp up faster through medium/hard
 const INITIAL_SPAWN_INT     = 1.4;   // seconds between obstacle spawns
-const MIN_SPAWN_INT         = 0.65;
-const SPAWN_RAMP_RATE       = 0.025; // reduction per second
+const MIN_SPAWN_INT         = 0.25;  // dense traffic at INSANE
+const SPAWN_RAMP_RATE       = 0.015; // faster spawn ramp — hits minimum ~75s
 const CURVE_START_TIME      = 55;    // seconds before curves appear
 const MAX_CURVE_INTENSITY   = 0.8;
 
 const DIFFICULTY_TIERS = [
   { time:   0, name: 'EASY',   color: '#44ee44' },
-  { time:  20, name: 'MEDIUM', color: '#ffee00' },
-  { time:  55, name: 'HARD',   color: '#ff8800' },
-  { time: 110, name: 'INSANE', color: '#ff2222' },
+  { time:  15, name: 'MEDIUM', color: '#ffee00' },
+  { time:  35, name: 'HARD',   color: '#ff8800' },
+  { time:  65, name: 'INSANE', color: '#ff2222' },
 ];
 
 // ─── Player ──────────────────────────────────────────────────────────────────
 const PLAYER_LIVES          = 3;
 const LANE_CHANGE_SPEED     = 4.5; // lanes per second
 const INVINCIBILITY_TIME    = 1.8; // seconds after a crash
-const COLLISION_Z_THRESHOLD = SEGMENT_LENGTH * 2;
+const COLLISION_Z_THRESHOLD = SEGMENT_LENGTH * 2;   // start checking this far ahead
+const COLLISION_Z_MIN       = SEGMENT_LENGTH * 1.2;  // stop checking once car has visually passed player
 const COLLISION_LANE_THRESH = 0.72;
 
 // ─── Score ───────────────────────────────────────────────────────────────────

@@ -119,6 +119,7 @@ function startCountdown() {
   initObstacles();
   initPowerups();
   buildSegments();
+  initScenery(W, H);
   gameState.current        = STATE.COUNTDOWN;
   gameState.countdownValue = 3;
   gameState.countdownTimer = 1.0;

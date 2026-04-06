@@ -33,7 +33,7 @@ function updateDifficulty(dt) {
       s.tierAnnounce = {
         text:  DIFFICULTY_TIERS[i].name + '!',
         color: DIFFICULTY_TIERS[i].color,
-        timer: 2.0,
+        timer: 3.0,
       };
       playTierUp();
       break;
@@ -79,6 +79,9 @@ function render() {
 
   // Always draw road (visible in all in-game states)
   drawRoad(ctx, W, H);
+  drawSceneryBg(ctx, W, H);
+  drawRoadsideObjects(ctx, W, H);
+  drawWeather(ctx, W, H);
   drawPowerups(ctx, W, H);
   drawObstacles(ctx, W, H);
   drawPlayer(ctx, W, H);
@@ -127,6 +130,7 @@ function loop(timestamp) {
     // Update camera / road scroll
     gameState.cameraZ += gameState.speed * gameState.player.boostMult * dt;
 
+    updateScenery(dt, W, H);
     updateDifficulty(dt);
     updateObstacleSpawn(dt);
     updatePlayer(dt, W, H);
@@ -141,6 +145,7 @@ function loop(timestamp) {
 
   if (gameState.current === STATE.COUNTDOWN) {
     gameState.cameraZ += 80 * dt; // slow scroll during countdown
+    updateScenery(dt, W, H);
     gameState.countdownTimer -= dt;
     if (gameState.countdownTimer <= 0) {
       if (gameState.countdownValue > 0) {
@@ -164,6 +169,7 @@ window.addEventListener('load', () => {
   buildSegments();
   initObstacles();
   initPowerups();
+  initScenery(W, H);
   initUI();
   renderLeaderboard('menu-lb-rows');
   showScreen('screen-menu');

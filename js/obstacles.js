@@ -3,6 +3,7 @@ const OBSTACLE_POOL_SIZE = 20;
 
 function initObstacles() {
   obstaclePool.length = 0;
+  _lastSpawnedLane = -1;
   for (let i = 0; i < OBSTACLE_POOL_SIZE; i++) {
     obstaclePool.push({
       active:  false,
@@ -14,12 +15,24 @@ function initObstacles() {
   }
 }
 
+let _lastSpawnedLane = -1;
+
 function spawnObstacle() {
   const obj = obstaclePool.find(o => !o.active);
   if (!obj) return;
   obj.active   = true;
-  obj.lane     = Math.floor(Math.random() * NUM_LANES);
-  obj.worldZ   = gameState.cameraZ + DRAW_DISTANCE * SEGMENT_LENGTH;
+
+  // Pick a lane that differs from the last spawned lane so the player
+  // always gets a gap between same-lane obstacles.
+  let lane;
+  do { lane = Math.floor(Math.random() * NUM_LANES); }
+  while (lane === _lastSpawnedLane);
+  _lastSpawnedLane = lane;
+  obj.lane = lane;
+
+  // Start spawning close (20 segments) and ramp to full draw distance over 30s
+  const spawnSegs = Math.min(DRAW_DISTANCE, 20 + Math.floor(gameState.gameTime * 2.7));
+  obj.worldZ   = gameState.cameraZ + spawnSegs * SEGMENT_LENGTH;
   obj.palette  = OBSTACLE_PALETTES[Math.floor(Math.random() * OBSTACLE_PALETTES.length)];
   obj.nearMissGiven = false;
 }
@@ -37,9 +50,9 @@ function updateObstacles(dt) {
     }
 
     // ── Collision check ──────────────────────────────────────────────────
-    // Only check obstacles that are ahead of or just passing the player (not behind)
+    // Only check obstacles strictly ahead of the player — once passed, no collision
     const zDiff = obj.worldZ - gameState.cameraZ;
-    if (zDiff > -(SEGMENT_LENGTH * 0.5) && zDiff < COLLISION_Z_THRESHOLD) {
+    if (zDiff >= COLLISION_Z_MIN && zDiff < COLLISION_Z_THRESHOLD) {
       const playerCenter = getPlayerLaneCenter();
       const entityCenter = obj.lane;
       const laneDist = Math.abs(playerCenter - entityCenter);

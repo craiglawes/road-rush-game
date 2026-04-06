@@ -13,7 +13,7 @@ function spawnPowerup() {
   const types = Object.values(POWERUP_TYPES);
   obj.active = true;
   obj.lane   = Math.floor(Math.random() * NUM_LANES);
-  obj.worldZ = gameState.cameraZ + DRAW_DISTANCE * SEGMENT_LENGTH;
+  obj.worldZ = gameState.cameraZ + 50 * SEGMENT_LENGTH;
   obj.type   = types[Math.floor(Math.random() * types.length)];
   obj.angle  = 0;
 }
