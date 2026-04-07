@@ -89,7 +89,8 @@ function drawSkinPreview() {
   pctx.fillRect(0, 0, pc.width, pc.height);
 
   const skin = CAR_SKINS[gameState.selectedSkin];
-  drawCar(pctx, pc.width / 2, pc.height - 6, 0.62, skin, false);
+  if (skin.drawFn) skin.drawFn(pctx, pc.width / 2, pc.height - 6, 0.62, skin);
+  else drawCar(pctx, pc.width / 2, pc.height - 6, 0.62, skin, false);
   document.getElementById('skin-name').textContent = skin.name.toUpperCase();
 
   const dotsEl = document.getElementById('skin-dots');

@@ -78,12 +78,12 @@ const POWERUP_TYPES = {
 
 // ─── Car Skins ───────────────────────────────────────────────────────────────
 const CAR_SKINS = [
-  { name: 'Ferrari',     body: '#CC2200', bodyDark: '#881400', roofColor: '#770e00', bodyHighlight: 'rgba(255,140,100,0.3)', tailLight: '#ff2200', wingColor: '#CC2200', wingAccentColor: '#ffffff',  stripe: 'rgba(255,255,255,0.9)', plate: 'FXX' },
-  { name: 'Lamborghini', body: '#FFB800', bodyDark: '#996600', roofColor: '#664400', bodyHighlight: 'rgba(255,230,80,0.3)',  tailLight: '#ff6600', wingColor: '#111111', wingAccentColor: '#FFB800',  stripe: null,                    plate: 'SV'  },
-  { name: 'Bugatti',     body: '#1133CC', bodyDark: '#001188', roofColor: '#000d66', bodyHighlight: 'rgba(80,130,255,0.3)',  tailLight: '#ff2200', wingColor: '#C0C0C0', wingAccentColor: '#1133CC',  stripe: 'rgba(192,192,192,0.75)',  plate: 'EB110' },
-  { name: 'Porsche',     body: '#D8D8D8', bodyDark: '#909090', roofColor: '#707070', bodyHighlight: 'rgba(255,255,255,0.3)', tailLight: '#ff2200', wingColor: '#cc4400', wingAccentColor: '#D8D8D8',  stripe: null,                    plate: 'GT911' },
-  { name: 'McLaren',     body: '#FF6600', bodyDark: '#993300', roofColor: '#552200', bodyHighlight: 'rgba(255,180,80,0.3)',  tailLight: '#ff4400', wingColor: '#111111', wingAccentColor: '#FF6600',  stripe: null,                    plate: 'P1'  },
-  { name: 'Aston',       body: '#004422', bodyDark: '#002211', roofColor: '#001a0d', bodyHighlight: 'rgba(0,180,80,0.2)',    tailLight: '#ff2200', wingColor: '#C0C0C0', wingAccentColor: '#004422',  stripe: 'rgba(192,192,192,0.6)',  plate: 'DB12' },
+  { name: 'Ferrari 488 GTB', body: '#CC2200', bodyDark: '#881400', roofColor: '#770e00', bodyHighlight: 'rgba(255,140,100,0.3)', tailLight: '#ff2200', wingColor: '#CC2200', wingAccentColor: '#ffffff',  stripe: 'rgba(255,255,255,0.9)', plate: 'FXX' },
+  { name: 'Lamborghini SV', body: '#FFB800', bodyDark: '#996600', roofColor: '#664400', bodyHighlight: 'rgba(255,230,80,0.3)',  tailLight: '#ff6600', wingColor: '#111111', wingAccentColor: '#FFB800',  stripe: null,                    plate: 'SV'  },
+  { name: 'Bugatti EB110',     body: '#1133CC', bodyDark: '#001188', roofColor: '#000d66', bodyHighlight: 'rgba(80,130,255,0.3)',  tailLight: '#ff2200', wingColor: '#C0C0C0', wingAccentColor: '#1133CC',  stripe: 'rgba(192,192,192,0.75)',  plate: 'EB110' },
+  { name: 'Porsche GT3 RS',     body: '#D8D8D8', bodyDark: '#909090', roofColor: '#707070', bodyHighlight: 'rgba(255,255,255,0.3)', tailLight: '#ff2200', wingColor: '#cc4400', wingAccentColor: '#D8D8D8',  stripe: null,                    plate: 'GT911' },
+  { name: 'McLaren P1',     body: '#FF6600', bodyDark: '#993300', roofColor: '#552200', bodyHighlight: 'rgba(255,180,80,0.3)',  tailLight: '#ff4400', wingColor: '#111111', wingAccentColor: '#FF6600',  stripe: null,                    plate: 'P1'  },
+  { name: 'Aston Martin DB12',       body: '#004422', bodyDark: '#002211', roofColor: '#001a0d', bodyHighlight: 'rgba(0,180,80,0.2)',    tailLight: '#ff2200', wingColor: '#C0C0C0', wingAccentColor: '#004422',  stripe: 'rgba(192,192,192,0.6)',  plate: 'DB12' },
 ];
 
 // Obstacle car palettes (muted so they don't compete with player)
